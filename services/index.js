@@ -64,8 +64,10 @@ class Contenedor {
     deleteById(e){
         try {
             let data = this.getAll();
-            data.splice(1, 1)
-            return data
+            let new_arr = data.filter((x) => {
+                return x.id !== e
+            })
+            return new_arr
         } catch (error) {
             console.log(error)
         }
@@ -74,7 +76,7 @@ class Contenedor {
         try {
             let {title, price, thumbnail} = data
             let response = this.getProdById(e);
-            response.map(e => {
+            let newObj = response.map(e => {
                 if(e.title !== title){
                      e.title = title
                      if(e.price !== price){
@@ -86,7 +88,7 @@ class Contenedor {
                 }
                 return e
             })
-            return response
+            return newObj
     } catch (error){
         console.log(error)
     }

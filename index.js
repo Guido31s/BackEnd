@@ -1,18 +1,39 @@
 const express = require("express");
-const app = express();
-const cors = require("cors");
+const path = require("path")
+const handlebars = require("express-handlebars")
 require("dotenv").config()
-app.use(cors("*"));
+
+const serverRoutes = require("./routes")
+
+// Initializations
+const app = express();
+
+// Settings
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-const serverRoutes = require("./routes")
-const path = require("path")
 
-app.use("/html", express.static(path.join(__dirname, "views")));
+// PUG----------------------------------------------------
+app.set("views", "./viewPug")
+app.set("view engine", "pug")
 
-app.get("/", (req, res) =>{
-    res.send(true)
-})
+// HBS----------------------------------------------------
+// app.set('views', path.join(__dirname, 'viewHBS', "handlebars"));
+// app.engine('handlebars', handlebars({defaultLayout: 'index' }));
+// app.set('view engine', 'handlebars');
+
+// EJS----------------------------------------------------
+// app.set("views", path.join(__dirname, "views", "ejs"))
+// app.set("view engine", "ejs")
+
+
+//Middlewares
+const cors = require("cors");
+app.use(cors("*"));
+
+
+//Pages
+app.use("/productos", express.static(path.join(__dirname, "viewhbs")));
+
 serverRoutes(app);
 
 app.listen(process.env.PORT, ()=>{
