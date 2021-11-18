@@ -6,21 +6,19 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Title</th>
+            <th scope="col">Name</th>
             <th scope="col">Price</th>
             <th scope="col">Thumbnail</th>
           </tr>
         </thead>
         <tbody>
             <% for (let products of response) { %>
-
                 <tr>
                   <th scope="row"><%= products.id %> </th>
-                  <td><%= products.title %></td>
+                  <td><%= products.name %></td>
                   <td><%= products.price %></td>
                   <td><%= products.thumbnail %></td>
               </tr>
-
             <% } %>  
         </tbody>
       </table>
