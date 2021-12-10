@@ -1,5 +1,7 @@
 let knex = require("knex");
-let {db} = require("./index"); 
+let {
+    db
+} = require("./index");
 
 let mysql = knex({
     client: 'mysql',
@@ -7,7 +9,8 @@ let mysql = knex({
         ...db
     },
     pool: {
-        min:0, max:10
+        min: 0,
+        max: 10
     }
 })
 
@@ -25,10 +28,10 @@ let mysql = knex({
 //     }
 // })();
 
-class Database{
+class Database {
     static client;
-    constructor(){
-        if(Database.client){
+    constructor() {
+        if (Database.client) {
             this.client = Database.client;
             return Database.client;
         }
