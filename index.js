@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path")
 let {config} = require("./config")
 const serverRoutes = require("./routes")
+const session = require("express-session")
 let Sockets = require("./utils/sockets")
 const { Server: HttpServer } = require('http');
 
@@ -12,6 +13,14 @@ let socket = new Sockets(httpServer);
 socket.listenConnection();
 
 // Settings
+app.use(session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 60000
+    }
+}))
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 // EJS----------------------------------------------------
